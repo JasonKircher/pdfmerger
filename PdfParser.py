@@ -1,10 +1,8 @@
 from PyPDF2 import PdfFileReader, PdfFileWriter
 
 
-def merge_pdf(input_paths, filename, output_path):
+def merge_pdf(input_paths, output_path, filename="out"):
     global global_paths
-    if filename == "":
-        filename = "out"
     writer = PdfFileWriter()
     for i in input_paths:
         pdf_reader = PdfFileReader(i)
