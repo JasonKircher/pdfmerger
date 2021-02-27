@@ -89,13 +89,13 @@ def main_app():
     def submit():
         global_paths.append(global_entryPath + text_top.get() + ".pdf")
         parts_list.insert("end", text_top.get())
-        text_top.set('')
+        text_top.delete(0, 'end')
 
     def end_me():
-        PdfParser.merge_pdf(global_paths, text_bot.get(), global_exitPath)
+        PdfParser.merge_pdf(global_paths, global_exitPath, text_bot.get())
         parts_list.delete("1", "end")
         global_paths.clear()
-        text_bot.set('')
+        text_bot.delete(0, 'end')
 
     def clear():
         parts_list.delete("1", "end")
@@ -111,9 +111,17 @@ def main_app():
         parts_list.insert(0, display_str)
 
     def func(event):
-        if text_top.get() == "":
-            return
-        submit()
+        print(event.__dict__)
+        widg = str(event.__dict__["widget"])
+        print(type(widg))
+        splitted = widg.split(" ")
+        xtype = splitted[len(splitted) - 1]
+        for elem in main_app.children:
+            if xtype[1:] == str(elem):
+                if elem == "!entry":
+                    submit()
+                elif elem == "!entry2":
+                    end_me()
 
     main_app = Gui.new_window("PDF-Merger", "480x300")
     start_path_app("in")
