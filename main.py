@@ -111,13 +111,11 @@ def main_app():
         parts_list.insert(0, display_str)
 
     def func(event):
-        print(event.__dict__)
         widg = str(event.__dict__["widget"])
-        print(type(widg))
         splitted = widg.split(" ")
         xtype = splitted[len(splitted) - 1]
-        for elem in main_app.winfo_children():
-            if xtype == str(elem):
+        for elem in main_app.children:
+            if xtype[1:] == str(elem):
                 if elem == "!entry":
                     submit()
                 elif elem == "!entry2":
