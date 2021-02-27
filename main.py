@@ -116,8 +116,8 @@ def main_app():
         print(type(widg))
         splitted = widg.split(" ")
         xtype = splitted[len(splitted) - 1]
-        for elem in main_app.children:
-            if xtype[1:] == str(elem):
+        for elem in main_app.winfo_children():
+            if xtype == str(elem):
                 if elem == "!entry":
                     submit()
                 elif elem == "!entry2":
